@@ -1,0 +1,108 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Choose sensors for raw data:"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raw Data"
+        android:id="@+id/startRawData"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gyroskope"
+        android:id="@+id/gyroskope"
+        android:checked="true"
+        android:textSize="20dp"
+        android:layout_below="@+id/magnetometer"
+        android:layout_alignLeft="@+id/magnetometer"
+        android:layout_alignStart="@+id/magnetometer"
+        android:layout_alignRight="@+id/magnetometer"
+        android:layout_alignEnd="@+id/magnetometer"
+        android:layout_marginTop="5dp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="magnetometer"
+        android:id="@+id/magnetometer"
+        android:checked="true"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="accelerometer"
+        android:id="@+id/accelerometer"
+        android:checked="true"
+        android:textSize="20dp"
+        android:layout_below="@+id/gyroskope"
+        android:layout_alignLeft="@+id/gyroskope"
+        android:layout_alignStart="@+id/gyroskope"
+        android:layout_alignRight="@+id/gyroskope"
+        android:layout_alignEnd="@+id/gyroskope"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Choose action:"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/accelerometer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Euler Angles"
+        android:id="@+id/startEuler"
+        android:layout_below="@+id/startRawData"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quaternions"
+        android:id="@+id/startQuaternions"
+        android:layout_below="@+id/startEuler"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3D Cube"
+        android:id="@+id/startCube"
+        android:layout_below="@+id/startQuaternions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>
