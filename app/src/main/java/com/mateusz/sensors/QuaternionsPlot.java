@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.mateusz.sensors.physics.Euler;
 import com.mateusz.sensors.physics.Quaternions;
 
 public class QuaternionsPlot extends Activity implements SensorEventListener {
@@ -79,11 +78,14 @@ public class QuaternionsPlot extends Activity implements SensorEventListener {
                 break;
             case R.id.complementary:
                 if(checked){
+                    Quaternions.turnFiltersOff();
                     Quaternions.setComplementaryFilterOn();
                 }
                 break;
             case R.id.kalman:
                 if(checked){
+                    Quaternions.turnFiltersOff();
+                    Quaternions.setKalmanFilterOn();
                 }
                 break;
         }
@@ -94,7 +96,6 @@ public class QuaternionsPlot extends Activity implements SensorEventListener {
         super.onResume();
 
         Quaternions.resetValuesToZero();
-        Quaternions.setComplementaryFilterOn();
 
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor acc = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

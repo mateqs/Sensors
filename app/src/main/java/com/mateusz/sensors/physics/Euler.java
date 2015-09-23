@@ -30,6 +30,7 @@ public class Euler {
     private static Timer timer = new Timer();
     private static float[] rotationMatrix = new float[9];
     private static float[] accMagOrientation = new float[3];
+    private static float[] accMagInitOrientation = new float[3];
 
 
     //Returns Euler angles if event from gyro, or null otherwise
@@ -53,24 +54,27 @@ public class Euler {
 
     public static void setComplementaryFilterOn() {
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
+        if (SensorManager.getRotationMatrix(rotationMatrix, null, accel, magnet)) {
+            SensorManager.getOrientation(rotationMatrix, accMagInitOrientation);
 
-                if (SensorManager.getRotationMatrix(rotationMatrix, null, accel, magnet)) {
-                    SensorManager.getOrientation(rotationMatrix, accMagOrientation);
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+
+                    if (SensorManager.getRotationMatrix(rotationMatrix, null, accel, magnet)) {
+                        SensorManager.getOrientation(rotationMatrix, accMagOrientation);
+
+
+                        float oneMinusCoeff = 1.0f - FILTER_COEFFICIENT;
+
+                        lastPhi = lastPhi * FILTER_COEFFICIENT + oneMinusCoeff * ((accMagOrientation[1] - accMagInitOrientation[1]) * -1.0f);
+                        lastTheta = lastTheta * FILTER_COEFFICIENT + oneMinusCoeff * (accMagOrientation[2] - accMagInitOrientation[2]);
+                        lastPsi = lastPsi * FILTER_COEFFICIENT + oneMinusCoeff * ((accMagOrientation[0] - accMagOrientation[0]) * -1.0f);
+                    }
                 }
-
-                float oneMinusCoeff = 1.0f - FILTER_COEFFICIENT;
-
-                lastPhi = lastPhi * FILTER_COEFFICIENT + oneMinusCoeff * (accMagOrientation[1] * -1.0f);
-                lastTheta = lastTheta * FILTER_COEFFICIENT + oneMinusCoeff * accMagOrientation[2];
-                lastPsi = lastPsi * FILTER_COEFFICIENT + oneMinusCoeff * (accMagOrientation[0] * -1.0f);
-
-            }
-        }, 500, 30);
-
+            }, 500, 30);
+        }
     }
 
     public static void turnFiltersOff() {
@@ -91,9 +95,9 @@ public class Euler {
             final double cosTheta = Math.cos(lastTheta);
             final double tanTheta = Math.tan(lastTheta);
 
-            final double phi = lastPhi +     (dT * ( gyroX + gyroY * sinPhi * tanTheta + gyroZ * cosPhi * tanTheta));
-            final double theta = lastTheta + (dT * ( gyroY * cosPhi - gyroZ * sinPhi));
-            final double psi = lastPsi +     (dT * ((gyroY * sinPhi) / cosTheta + (gyroZ * cosPhi) / cosTheta));
+            final double phi = lastPhi + (dT * (gyroX + gyroY * sinPhi * tanTheta + gyroZ * cosPhi * tanTheta));
+            final double theta = lastTheta + (dT * (gyroY * cosPhi - gyroZ * sinPhi));
+            final double psi = lastPsi + (dT * ((gyroY * sinPhi) / cosTheta + (gyroZ * cosPhi) / cosTheta));
 
             lastPhi = phi;
             lastTheta = theta;

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Complementary"
             android:id="@+id/complementary"
-            android:checked="true"
+            android:checked="false"
             android:onClick="onRadioButtonClicked"/>
 
         <RadioButton

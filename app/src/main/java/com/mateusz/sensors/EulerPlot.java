@@ -16,7 +16,6 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.mateusz.sensors.physics.Euler;
-import com.mateusz.sensors.physics.Test;
 
 public class EulerPlot extends Activity implements SensorEventListener {
 
@@ -40,26 +39,6 @@ public class EulerPlot extends Activity implements SensorEventListener {
 
     }
 
-//        @Override
-//    public void onSensorChanged(SensorEvent event) {
-//
-//        float[] eulers;
-//
-//        Test.setValuesFromEvent(event);
-//
-//        eulers = Test.getEulers();
-//        for (int i = 0; i < 3; i++) {
-//            eulers[i] = (float)Math.toDegrees(eulers[i]);
-//        }
-//
-//        series.resetData(new DataPoint[]{
-//                new DataPoint(0, 0),
-//                new DataPoint(1, eulers[1]),
-//                new DataPoint(2, eulers[2]),
-//                new DataPoint(3, eulers[0]),
-//                new DataPoint(4, 0)
-//        });
-//    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -109,7 +88,6 @@ public class EulerPlot extends Activity implements SensorEventListener {
     protected void onResume() {
         super.onResume();
 
-        Euler.setComplementaryFilterOn();
         Euler.resetValuesToZero();
 
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);

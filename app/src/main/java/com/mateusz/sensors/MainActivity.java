@@ -16,6 +16,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(getApplicationContext(), OpenGL.class);
+        startActivity(intent);
+
         final Switch switchAcce = (Switch) findViewById(R.id.accelerometer);
         final Switch switchGyro = (Switch) findViewById(R.id.gyroskope);
         final Switch switchMagne = (Switch) findViewById(R.id.magnetometer);

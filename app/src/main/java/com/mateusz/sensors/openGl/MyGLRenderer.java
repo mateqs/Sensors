@@ -87,7 +87,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer, SensorEventListener
 // Position model so we can see it
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
-        gl.glTranslatef(0, 0, -3.0f);
+        gl.glTranslatef(0, 0, -3.2f);
 
 // Set rotation angle based on the time
         gl.glRotatef(-axisAngle[0], axisAngle[1], axisAngle[2], axisAngle[3]);
@@ -111,7 +111,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer, SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        float[] angles = Quaternions.getQuaterionsInAxisAngle(event);
+        float[] angles = Quaternions.getQuaternionsInAxisAngle(event);
 
         if (angles != null)
             axisAngle = angles;

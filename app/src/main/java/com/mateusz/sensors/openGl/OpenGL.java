@@ -15,7 +15,7 @@ import com.mateusz.sensors.physics.Quaternions;
 
 public class OpenGL extends Activity {
 
-    private FilterinModes mode = FilterinModes.NONE;
+    private FilterinModes mode = FilterinModes.KALMAN;
     private MyGLView view;
 
     @Override
@@ -26,20 +26,29 @@ public class OpenGL extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         view = new MyGLView(this);
         setContentView(view);
-
+/**/
+/**/        Quaternions.setKalmanFilterOn();
+/**/
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (mode) {
                     case NONE: {
-
                         mode = FilterinModes.COMPLEMENTARY;
+                        Quaternions.turnFiltersOff();
                         Quaternions.setComplementaryFilterOn();
                         Toast.makeText(getApplicationContext(), "Complementary filter", Toast.LENGTH_SHORT).show();
 
                         break;
                     }
                     case COMPLEMENTARY: {
+                        mode = FilterinModes.KALMAN;
+                        Quaternions.turnFiltersOff();
+                        Quaternions.setKalmanFilterOn();
+                        Toast.makeText(getApplicationContext(), "Kalman filter", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    }case KALMAN: {
                         mode = FilterinModes.NONE;
                         Quaternions.turnFiltersOff();
                         Toast.makeText(getApplicationContext(), "Filtering turned off", Toast.LENGTH_SHORT).show();

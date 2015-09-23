@@ -24,5 +24,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.jjoe64:graphview:4.0.1'
+    compile 'gov.nist.math:jama:1.0.2'
+
 
 }
