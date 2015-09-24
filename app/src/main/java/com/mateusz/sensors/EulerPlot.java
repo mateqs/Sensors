@@ -19,7 +19,6 @@ import com.mateusz.sensors.physics.Euler;
 
 public class EulerPlot extends Activity implements SensorEventListener {
 
-    private GraphView graph;
     private BarGraphSeries<DataPoint> series;
 
 
@@ -27,6 +26,7 @@ public class EulerPlot extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_euler_plot);
+        GraphView graph;
 
         graph = (GraphView) findViewById(R.id.graph);
         series = new BarGraphSeries<>(new DataPoint[]{

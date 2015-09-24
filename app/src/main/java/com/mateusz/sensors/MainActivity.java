@@ -16,9 +16,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(getApplicationContext(), OpenGL.class);
-        startActivity(intent);
-
         final Switch switchAcce = (Switch) findViewById(R.id.accelerometer);
         final Switch switchGyro = (Switch) findViewById(R.id.gyroskope);
         final Switch switchMagne = (Switch) findViewById(R.id.magnetometer);
@@ -44,14 +41,14 @@ public class MainActivity extends Activity {
             }
         });
 
-        ((Button) findViewById(R.id.startEuler)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.startEuler).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), EulerPlot.class));
             }
 
         });
-        ((Button) findViewById(R.id.startQuaternions)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.startQuaternions).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), QuaternionsPlot.class));
@@ -59,7 +56,7 @@ public class MainActivity extends Activity {
         });
 
 
-        ((Button) findViewById(R.id.startCube)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.startCube).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), OpenGL.class));

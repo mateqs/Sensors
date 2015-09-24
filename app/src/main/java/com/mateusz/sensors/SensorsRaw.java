@@ -17,7 +17,6 @@ import java.util.LinkedList;
 public class SensorsRaw extends Activity  implements SensorEventListener{
 
     private SensorManager sensorManager;
-    private boolean booleansArray[];
     private Sensor sensorsArray[];
     private LinkedList<LinkedList<TextView>> textViewList;
 
@@ -33,10 +32,10 @@ public class SensorsRaw extends Activity  implements SensorEventListener{
         boolean gyro = intent.getBooleanExtra("gyro", true);
         boolean magne= intent.getBooleanExtra("magne",true);
 
-        booleansArray = new boolean[] {acce, gyro, magne};
+        boolean[] booleansArray = new boolean[]{acce, gyro, magne};
 
         for (int i = 0; i < booleansArray.length ; i++){
-            if(booleansArray [i] == false){
+            if(!booleansArray[i]){
                 setInvisible(textViewList.get(i));
             }
         }
@@ -45,13 +44,13 @@ public class SensorsRaw extends Activity  implements SensorEventListener{
 
         Sensor acceSen=null, gyroSen=null, magneSen = null;
 
-        if (acce == true){
+        if (acce){
              acceSen = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
-        if (gyro == true){
+        if (gyro){
              gyroSen = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         }
-        if (magne == true){
+        if (magne){
              magneSen = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         }
 
@@ -60,10 +59,10 @@ public class SensorsRaw extends Activity  implements SensorEventListener{
         boolean ok = true;
         for (int i =0 ; i<sensorsArray.length ; i++){
 
-            if(ok == true) {
+            if(ok) {
                 if (sensorsArray[i] == null) {
 
-                    if (booleansArray[i] == true) {
+                    if (booleansArray[i]) {
                         Toast.makeText(this, "Problem with some sensor", Toast.LENGTH_LONG).show();
                         ok=false;
                     }
@@ -74,19 +73,19 @@ public class SensorsRaw extends Activity  implements SensorEventListener{
 
     private LinkedList<LinkedList<TextView>> findTextViews(){
 
-        LinkedList<TextView> acc = new LinkedList<TextView>();
+        LinkedList<TextView> acc = new LinkedList<>();
         acc.add((TextView) (findViewById(R.id.acc)));
         acc.add((TextView) (findViewById(R.id.accx)));
         acc.add((TextView) (findViewById(R.id.accy)));
         acc.add((TextView) (findViewById(R.id.accz)));
 
-        LinkedList<TextView> gyro = new LinkedList<TextView>();
+        LinkedList<TextView> gyro = new LinkedList<>();
         gyro.add((TextView) findViewById(R.id.gyro));
         gyro.add((TextView) findViewById(R.id.gyrox));
         gyro.add((TextView) findViewById(R.id.gyroy));
         gyro.add((TextView) findViewById(R.id.gyroz));
 
-        LinkedList<TextView> magne = new LinkedList<TextView>();
+        LinkedList<TextView> magne = new LinkedList<>();
         magne.add((TextView) findViewById(R.id.magne));
         magne.add((TextView) findViewById(R.id.magnex));
         magne.add((TextView) findViewById(R.id.magney));
@@ -100,7 +99,7 @@ public class SensorsRaw extends Activity  implements SensorEventListener{
         return lists;
     }
 
-    public void setInvisible(LinkedList<TextView> invisible) {
+    private void setInvisible(LinkedList<TextView> invisible) {
 
         for(TextView element: invisible){
             element.setVisibility(View.GONE);

@@ -28,9 +28,9 @@ public class Quaternions {
     //Values from accelerometer and gyroscope for filtering
     private static volatile float[] accel = new float[3];
     private static volatile float[] magnet = new float[3];
-    private static float[] accMagInitOrientation = new float[3];
-    private static float[] rotationMatrix = new float[9];
-    private static float[] accMagOrientation = new float[3];
+    private static final float[] accMagInitOrientation = new float[3];
+    private static final float[] rotationMatrix = new float[9];
+    private static final float[] accMagOrientation = new float[3];
 
     //Complementary filter fields
     public static final float FILTER_COEFFICIENT = 0.98f;
@@ -116,7 +116,6 @@ public class Quaternions {
                     newQ4 = x.get(3, 0);
 
 //                Compute the error covariance
-
                     P = Pp.minus(Pp.times(H).times(K));
 
                 }
@@ -131,7 +130,7 @@ public class Quaternions {
 
             }
 
-            //Normalizing quaternions
+            //Normalize quaternions
             final double Nq = Math.pow(newQ1, 2) + Math.pow(newQ2, 2) + Math.pow(newQ3, 2) + Math.pow(newQ4, 2);
             final double sqrt=Math.sqrt(Nq);
 
@@ -148,15 +147,15 @@ public class Quaternions {
         }
         timestamp = event.timestamp;
 
-        double[] quaterions = new double[4];
+        double[] quaternions = new double[4];
 
 
-        quaterions[0] = q1;
-        quaterions[1] = q2;
-        quaterions[2] = q3;
-        quaterions[3] = q4;
+        quaternions[0] = q1;
+        quaternions[1] = q2;
+        quaternions[2] = q3;
+        quaternions[3] = q4;
 
-        return quaterions;
+        return quaternions;
     }
 
     public static void resetValuesToZero() {
@@ -170,6 +169,7 @@ public class Quaternions {
     public static void setKalmanFilterOn() {
         kalman = true;
 
+//        Initial orientation from accelerometer and magnetometer
         if (SensorManager.getRotationMatrix(rotationMatrix, null, accel, magnet))
             SensorManager.getOrientation(rotationMatrix, accMagInitOrientation);
 
@@ -243,7 +243,7 @@ public class Quaternions {
     }
 
 
-    public static double[] eulersToQuaternions() {
+    private static double[] eulersToQuaternions() {
 
         final double c1 = Math.cos((-1) * accMagOrientation[0] / 2);
         final double s1 = Math.sin((-1) * accMagOrientation[0] / 2);
@@ -265,6 +265,7 @@ public class Quaternions {
     }
 
     //    Returns axis angle values if event from gyro, or null otherwise
+    @Nullable
     public static float[] getQuaternionsInAxisAngle(SensorEvent event) {
         final float values[] = new float[4];
         final double[] quaternions = getQuaternions(event);

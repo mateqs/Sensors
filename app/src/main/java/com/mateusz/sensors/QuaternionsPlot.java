@@ -19,7 +19,6 @@ import com.mateusz.sensors.physics.Quaternions;
 
 public class QuaternionsPlot extends Activity implements SensorEventListener {
 
-    private GraphView graph;
     private BarGraphSeries<DataPoint> series;
 
 
@@ -29,7 +28,7 @@ public class QuaternionsPlot extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_quaternions_plot);
 
 
-        graph = (GraphView) findViewById(R.id.graph);
+        GraphView graph = (GraphView) findViewById(R.id.graph);
 
 
         series = new BarGraphSeries<DataPoint>(new DataPoint[]{

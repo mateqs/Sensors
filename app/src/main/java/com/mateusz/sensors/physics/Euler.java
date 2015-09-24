@@ -28,9 +28,9 @@ public class Euler {
     //Complementary filter fields
     public static final float FILTER_COEFFICIENT = 0.97f;
     private static Timer timer = new Timer();
-    private static float[] rotationMatrix = new float[9];
-    private static float[] accMagOrientation = new float[3];
-    private static float[] accMagInitOrientation = new float[3];
+    private static final float[] rotationMatrix = new float[9];
+    private static final float[] accMagOrientation = new float[3];
+    private static final float[] accMagInitOrientation = new float[3];
 
 
     //Returns Euler angles if event from gyro, or null otherwise

@@ -18,7 +18,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer, SensorEventListener
     private static final String TAG = "GLRenderer";
     private final Context context;
     private final MyCube cube = new MyCube();
-    private long startTime;
     private long fpsStartTime;
     private long numFrames;
     private float[] axisAngle = new float[4];
@@ -35,7 +34,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer, SensorEventListener
 
         boolean SEE_THRU = true;
 
-        startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         fpsStartTime = startTime;
         numFrames = 0;
 // Define the lighting
